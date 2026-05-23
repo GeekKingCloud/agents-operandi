@@ -1,10 +1,10 @@
 # Shared Skills Repository
 
-The reusable skills repository lives at `C:\Users\thete\Documents\Code\skills`.
+The reusable skills repository is hosted at https://github.com/GeekKingCloud/skills.
 
-Before using or editing skills, read `C:\Users\thete\Documents\Code\skills\AGENTS.md`; it is the source of truth for how that repository is organized and maintained.
+Before using or editing skills, read that repository's `AGENTS.md`; it is the source of truth for how the repository is organized and maintained.
 
-Use `C:\Users\thete\Documents\Code\skills\README.md` as the published catalog of available skills. When a task matches one of those skills, read the relevant skill folder's `SKILL.md` before proceeding and lean on that skill's workflow where it applies.
+Use that repository's `README.md` as the published catalog of available skills. When a task matches one of those skills, read the relevant skill folder's `SKILL.md` before proceeding and lean on that skill's workflow where it applies.
 
 Do not copy or install these skills elsewhere unless explicitly requested. Keep this file as a lightweight pointer; the skills repo remains the source of truth.
 
@@ -74,11 +74,3 @@ For docs-only changes, verify formatting, links, consistency, and source-of-trut
 Do not change tests only to make them pass. If existing tests no longer match the intended behavior, update them so they still verify the desired functionality and source-of-truth contract.
 
 Do not write awkward production code only to satisfy awkward tests. First decide whether the test expresses the right product or architecture goal, then update code, tests, or both so they align with safe implementation practice and the repository's style.
-
-## Windows Shell Policy
-
-When working in a Windows environment, do not fall back to WSL for repository work, tests, scripts, file inspection, or shell command execution unless the user explicitly asks for WSL.
-
-Prefer native Windows tools and PowerShell. For Bash-based repo scripts or Bats tests on Windows, use the documented Git Bash path, typically `C:\Program Files\Git\bin\bash.exe`, or the repo-documented Windows command such as `bats.cmd`.
-
-If a command fails because `bash` resolved to WSL, treat that as shell selection drift. Retry with the explicit Git Bash path or ask for direction; do not add code workarounds, repo-local launcher overrides, or WSL bridge paths.
