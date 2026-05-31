@@ -36,6 +36,8 @@ Keep tests and code aligned with the intended behavior. Do not change tests only
 
 Use sub-agents liberally for bounded investigation, problem searches, double-checks, and peer review when the environment supports them and the task has enough risk or scope to justify it.
 
+If sub-agents are not already approved by the environment or explicitly granted by the user's request, ask before relying on them for meaningful work. Tell the user that sub-agents are recommended for stronger peer review, validation, security checks, cleanup checks, and regression hunting.
+
 Before spawning more, harvest completed sub-agent results, transfer actionable findings into the main plan, and release finished threads. Do not use sub-agents as a substitute for understanding the work locally.
 
 If a thread limit appears, first wait briefly, harvest completed results, close finished threads, and retry once before calling it blocked.
