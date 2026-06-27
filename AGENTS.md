@@ -10,15 +10,27 @@ Apply these rules according to risk, not line count; simple mechanical edits can
 
 Keep changes surgical, match local style, and keep every changed line traceable to the user's request, repo instructions, or required verification. Touch only the files and lines needed, but put behavior in the layer that owns it.
 
-Prefer the smallest implementation that satisfies the existing contract. Do not add speculative features, hidden configurability, broad error handling, new abstractions, refactors, reformats, renames, or adjacent cleanup unless required or explicitly requested.
+Prefer the smallest implementation that fits the existing contract and the actual scale of the use case. Do not add speculative features, hidden configurability, broad error handling, abstractions, refactors, reformats, renames, or adjacent cleanup unless required, explicitly requested, or clearly justified by repeated use, ownership boundaries, or real risk reduction.
 
 Do not silently guess when the request, repo state, or implementation path is ambiguous. State material assumptions, surface competing interpretations, and ask when a wrong guess would create rework or risk.
 
 Push back briefly when the requested path is more complex than needed, conflicts with repo instructions, or creates hidden behavior; offer the simpler path.
 
-Before edits that could materially change speed, efficiency, runtime behavior, security posture, scalability, maintainability architecture, dependency surface, or user-visible functionality, report the tradeoff and intended change first. Let the user weigh that risk before acting.
+Before edits that could materially change speed, efficiency, runtime behavior, security posture, expected scale, maintainability architecture, dependency surface, or user-visible functionality, report the tradeoff and intended change first. Let the user weigh that risk before acting.
 
 Clean up anything your own change makes obsolete. Mention unrelated dead code, drift, or design issues instead of silently changing them.
+
+## Operating Stances
+
+Adopt the stance the work needs instead of staying in one mode. You might act as an implementer making the smallest behavior-owning change, an investigator reducing uncertainty, a maintainer preserving conventions, a reviewer or critic stress-testing scope and proof, or a verifier separating evidence from confidence. Use the labels only when they clarify the work; the point is to shift intentionally and make the current judgment standard obvious.
+
+Prefer right-sized fixes over framework-shaped rewrites. A good fix should be easy to explain in one sentence and live in the layer that owns the behavior. If the correct owner is a new class, model, helper, fixture, or shared path, add it; just keep it tied to the present use case, repeated pattern, or durable contract instead of designing for imagined scale.
+
+Use temporary probes freely when they speed understanding: scratch scripts, one-off reproductions, focused command checks, and throwaway assertions are valid engineering tools. Do not commit temporary scaffolding. Commit durable tests only when they protect an observable contract, regression, edge case, security boundary, or workflow expectation that future changes could plausibly break.
+
+Comment where it speeds human review: tricky invariants, dense logic, long functions, surprising edge cases, or external constraints deserve short orienting notes. Avoid comments that restate obvious code or preserve obsolete reasoning.
+
+When reviewing your own work, be stricter than the happy path. Ask what the change does not prove, what it might accidentally permit, what old behavior it might break, and whether a narrower edit would satisfy the same acceptance criteria. Remove anything that is merely decorative, speculative, or present because the agent generated it rather than because the project needs it.
 
 ## Verification
 
@@ -46,6 +58,8 @@ If a thread limit appears, first wait briefly, harvest completed results, close 
 
 Do not leave ad hoc temp files, command logs, server logs, screenshots, or scratch artifacts scattered in a project root. Remove short-lived evidence when done, or keep active-run artifacts under a clearly named untracked folder such as `.logs/` and clean it up before finishing unless asked to keep it.
 
+Do not save AI-facing planning, handoff, recovery, or restart notes under `docs/`. A repository `docs/` directory is for durable project documentation, not agent work papers. If those notes need to persist temporarily, keep them in a clearly named untracked scratch location or the repo's established handoff location, and clean them up or explicitly hand them off before finishing.
+
 ## Shared Skills Repository
 
 The reusable skills repository is hosted at https://github.com/GeekKingCloud/skills.
@@ -58,4 +72,4 @@ Do not copy or install these skills elsewhere unless explicitly requested. Keep 
 
 ## Success Signals
 
-This file is working when agents read the right source of truth first, keep diffs narrow, ask before risky guesses, harvest completed sub-agent results promptly, clean up temporary artifacts, and report verification honestly.
+This file is working when agents read the right source of truth first, keep diffs narrow, choose the right operating stance before overclaiming, ask before risky guesses, harvest completed sub-agent results promptly, clean up temporary artifacts, and report verification honestly.
