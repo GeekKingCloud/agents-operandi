@@ -1,12 +1,33 @@
-## Repository Instructions
+# Repository Instructions
 
-When starting inside a repository, or when asked to inspect or work in a folder, read the nearest `AGENTS.md` first and treat it as that directory's source of truth.
+This file is the entry point for agents working in this repository or in a repository that copies this kit. Read the nearest `AGENTS.md` first and treat it as that directory's source of truth.
 
-If it points to `STYLE.md`, `README.md`, `HANDOFF.md`, repo-root plans, or other supporting files, read the relevant references before editing, debugging, or proposing workflow changes. For nested directories, prefer the nearest `AGENTS.md` while preserving higher-level rules that still apply.
+If this file points to `README.md`, `CONTEXT.md`, `STYLE.md`, `HANDOFF.md`, plans, workflows, rubrics, or other supporting files, read the relevant references before editing, debugging, or proposing workflow changes. For nested directories, prefer the nearest `AGENTS.md` while preserving higher-level rules that still apply.
+
+## How To Use This Kit
+
+Use the root file for universal rules. Pull in supporting files only when the task needs them:
+
+| Task | Read next |
+| --- | --- |
+| Coding, tests, refactors, PR implementation | `instructions/coding.md`, `workflows/generate-evaluate-repair.md`, `workflows/verification.md` |
+| Code review, roast, release-risk review | `instructions/review.md`, `workflows/review-and-roast.md`, `rubrics/code-review.md`, `rubrics/security-safety.md` |
+| Planning, implementation breakdowns, migration plans | `rubrics/plan-quality.md`, `workflows/repository-docs.md`, `workflows/handoff-and-state.md` |
+| Web/source research, source review, or signal triage | `instructions/research.md`, `rubrics/research-signal.md` |
+| Personal-assistant, conversational, channel, or owner-facing behavior | `instructions/personal-assistant.md` |
+| Servers, cron, scripts, automation, local infrastructure | `instructions/ops-and-automation.md` |
+| Skills, prompts, evals, harnesses, agent policy | `instructions/skills-and-harnesses.md`, `rubrics/agent-harness-eval.md` |
+| Computer/browser/file-system use | `instructions/computer-use.md` |
+| Secrets, privacy, permissions, public/private boundaries | `instructions/security-and-privacy.md` |
+| Multi-agent work or peer review | `workflows/subagents.md` |
+| Restart-safe state or handoff | `workflows/handoff-and-state.md` |
+| Adding repo guidance files | `workflows/repository-docs.md` |
+
+If a referenced file is absent in a downstream project, continue with the root rules and note the missing guidance only when it changes risk.
 
 ## Work Rules
 
-Apply these rules according to risk, not line count; simple mechanical edits can stay lightweight, but behavior, security, data integrity, workflow, interface, or convention changes still need source-of-truth checks, verification, and review proportional to risk.
+Apply these rules according to risk, not line count. Simple mechanical edits can stay lightweight, but behavior, security, data integrity, workflow, interface, or convention changes need source-of-truth checks, verification, and review proportional to risk.
 
 Keep changes surgical, match local style, and keep every changed line traceable to the user's request, repo instructions, or required verification. Touch only the files and lines needed, but put behavior in the layer that owns it.
 
@@ -22,9 +43,9 @@ Clean up anything your own change makes obsolete. Mention unrelated dead code, d
 
 ## Operating Stances
 
-Adopt the stance the work needs instead of staying in one mode. You might act as an implementer making the smallest behavior-owning change, an investigator reducing uncertainty, a maintainer preserving conventions, a reviewer or critic stress-testing scope and proof, or a verifier separating evidence from confidence. Use the labels only when they clarify the work; the point is to shift intentionally and make the current judgment standard obvious.
+Adopt the stance the work needs instead of staying in one mode: implementer, investigator, maintainer, reviewer, verifier, operator, or assistant. Use the labels only when they clarify the work; the point is to shift intentionally and make the current judgment standard obvious.
 
-Prefer right-sized fixes over framework-shaped rewrites. A good fix should be easy to explain in one sentence and live in the layer that owns the behavior. If the correct owner is a new class, model, helper, fixture, or shared path, add it; just keep it tied to the present use case, repeated pattern, or durable contract instead of designing for imagined scale.
+Prefer right-sized fixes over framework-shaped rewrites. A good fix should be easy to explain in one sentence and live in the layer that owns the behavior. If the correct owner is a new class, model, helper, fixture, or shared path, add it; just keep it tied to the present use case, repeated pattern, or durable contract instead of imagined scale.
 
 Use temporary probes freely when they speed understanding: scratch scripts, one-off reproductions, focused command checks, and throwaway assertions are valid engineering tools. Do not commit temporary scaffolding. Commit durable tests only when they protect an observable contract, regression, edge case, security boundary, or workflow expectation that future changes could plausibly break.
 
@@ -36,9 +57,9 @@ When reviewing your own work, be stricter than the happy path. Ask what the chan
 
 For behavior changes and bug fixes, define success in verifiable terms before editing when practical, or as soon as the needed context is clear. Prefer a failing test, focused reproduction, or concrete check.
 
-Run the narrowest meaningful verification that covers the change. For related batches, make the coherent set of edits first, then verify that group; avoid expensive full suites after every microchange unless risk or uncertainty warrants it. For docs-only changes, verify formatting, links, consistency, and source-of-truth alignment instead of forcing unrelated test suites.
+For multi-step or non-trivial work, use the generate/evaluate/repair loop in `workflows/generate-evaluate-repair.md`: create the smallest useful artifact, evaluate it with the narrowest meaningful check, repair observed failures, and repeat while progress is clear and bounded.
 
-For multi-step or non-trivial work, keep a short plan tied to verification, iterate when another pass would improve correctness or risk control, and continue until the requested outcome is implemented and checked or a real blocker is clear.
+Run the narrowest meaningful verification that covers the change. For related batches, make the coherent set of edits first, then verify that group; avoid expensive full suites after every microchange unless risk or uncertainty warrants it. For docs-only changes, verify formatting, links, consistency, and source-of-truth alignment instead of forcing unrelated test suites.
 
 Do not claim completion unless the artifact, command, or check actually succeeded. If a tool fails or evidence comes from the wrong source, say so and correct course.
 
@@ -46,7 +67,7 @@ Keep tests and code aligned with the intended behavior. Do not change tests only
 
 ## Sub-Agents
 
-Use sub-agents liberally for bounded investigation, problem searches, double-checks, and peer review when the environment supports them and the task has enough risk or scope to justify it.
+Use sub-agents for bounded investigation, problem searches, double-checks, and peer review when the environment supports them and the task has enough risk or scope to justify it.
 
 If sub-agents are not already approved by the environment or explicitly granted by the user's request, ask before relying on them for meaningful work. Tell the user that sub-agents are recommended for stronger peer review, validation, security checks, cleanup checks, and regression hunting.
 
@@ -56,20 +77,10 @@ If a thread limit appears, first wait briefly, harvest completed results, close 
 
 ## Temporary Artifacts
 
-Do not leave ad hoc temp files, command logs, server logs, screenshots, or scratch artifacts scattered in a project root. Remove short-lived evidence when done, or keep active-run artifacts under a clearly named untracked folder such as `.logs/` and clean it up before finishing unless asked to keep it.
+Do not leave ad hoc temp files, command logs, server logs, screenshots, transcripts, or scratch artifacts scattered in a project root. Remove short-lived evidence when done, or keep active-run artifacts under a clearly named untracked folder such as `.logs/` and clean it up before finishing unless asked to keep it.
 
 Do not save AI-facing planning, handoff, recovery, or restart notes under `docs/`. A repository `docs/` directory is for durable project documentation, not agent work papers. If those notes need to persist temporarily, keep them in a clearly named untracked scratch location or the repo's established handoff location, and clean them up or explicitly hand them off before finishing.
 
-## Shared Skills Repository
-
-The reusable skills repository is hosted at https://github.com/GeekKingCloud/skills.
-
-Before using or editing skills, read that repository's `AGENTS.md`; it is the source of truth for how the repository is organized and maintained.
-
-Use that repository's `README.md` as the published catalog of available skills. When a task matches one of those skills, read the relevant skill folder's `SKILL.md` before proceeding and lean on that skill's workflow where it applies.
-
-Do not copy or install these skills elsewhere unless explicitly requested. Keep this file as a lightweight pointer; the skills repo remains the source of truth.
-
 ## Success Signals
 
-This file is working when agents read the right source of truth first, keep diffs narrow, choose the right operating stance before overclaiming, ask before risky guesses, harvest completed sub-agent results promptly, clean up temporary artifacts, and report verification honestly.
+This file is working when agents read the right source of truth first, load only the supporting files needed for the task, keep diffs narrow, choose the right operating stance before overclaiming, ask before risky guesses, harvest completed sub-agent results promptly, clean up temporary artifacts, and report verification honestly.
