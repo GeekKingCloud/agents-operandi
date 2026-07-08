@@ -35,6 +35,12 @@ Ask before privileged, destructive, expensive, credentialed, public, or privacy-
 - Failure messages should be concise and sanitized: no tokens, raw tracebacks, local paths, route IDs, or full logs.
 - Keep job prompts self-contained; future runs should not depend on chat context.
 
+## Long-running work
+
+Define a stall rule before starting renders, broad scans, migrations, large downloads, or generated helper scripts: if the process runs longer than the expected window without producing new evidence, stop, inspect processes and artifacts, and report whether a valid partial artifact exists instead of waiting silently.
+
+After a failed or stuck long run, do a root-cause pass before retrying: what stalled, what evidence would have caught it earlier, and what durable rule, timeout, or checkpoint would prevent it. A retry without a diagnosis usually reproduces the failure. Known-slow suites with predictable output are exempt; say which case applies.
+
 ## Services
 
 For long-running services, start them with the environment's process manager when available. Verify readiness with a health check or log signal. Clean up temporary servers/watchers when done.

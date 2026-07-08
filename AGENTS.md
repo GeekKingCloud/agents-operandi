@@ -20,10 +20,25 @@ Use the root file for universal rules. Pull in supporting files only when the ta
 | Computer/browser/file-system use | `instructions/computer-use.md` |
 | Secrets, privacy, permissions, public/private boundaries | `instructions/security-and-privacy.md` |
 | Multi-agent work or peer review | `workflows/subagents.md` |
+| Choosing orchestrator, worker, or reviewer models | `instructions/model-routing.md`, `templates/MODEL-DEFAULTS.md` |
 | Restart-safe state or handoff | `workflows/handoff-and-state.md` |
 | Adding repo guidance files | `workflows/repository-docs.md` |
 
 If a referenced file is absent in a downstream project, continue with the root rules and note the missing guidance only when it changes risk.
+
+## Task Intake
+
+Before substantial work, establish the task contract. When the request supplies it, restate it briefly; when it does not, state the assumed values and flag any that carry real wrong-start risk:
+
+- **Mode:** implement, report-only, review, recovery, or research.
+- **Target:** the exact repo, path, branch, session, or artifact being changed.
+- **Source of truth:** the exact branch, repo, raw source, or ticket. Installed copies, scratch dirs, side worktrees, and summaries are evidence only unless the user says otherwise.
+- **Boundary:** touch X, ignore Y, ask before Z.
+- **Review gate:** local-only, sub-agents required, roast required, or no reviewers.
+- **Success check:** the exact command, artifact, or state that proves the goal.
+- **Stop rule:** stop on ambiguity, failed proof, a long-running stall without new evidence, or an approval need.
+
+Use `templates/TASK-BRIEF.md` as the copyable form. Skip the ceremony for simple questions about files already in the current working directory.
 
 ## Work Rules
 
@@ -61,7 +76,7 @@ For multi-step or non-trivial work, use the generate/evaluate/repair loop in `wo
 
 Run the narrowest meaningful verification that covers the change. For related batches, make the coherent set of edits first, then verify that group; avoid expensive full suites after every microchange unless risk or uncertainty warrants it. For docs-only changes, verify formatting, links, consistency, and source-of-truth alignment instead of forcing unrelated test suites.
 
-Do not claim completion unless the artifact, command, or check actually succeeded. If a tool fails or evidence comes from the wrong source, say so and correct course.
+Do not claim completion unless the artifact, command, or check actually succeeded. If a tool fails or evidence comes from the wrong source, say so and correct course. For substantial work, label final claims by proof state and evidence provenance as described in `workflows/verification.md`.
 
 Keep tests and code aligned with the intended behavior. Do not change tests only to make them pass, and do not contort production code to satisfy bad tests.
 
@@ -70,6 +85,8 @@ Keep tests and code aligned with the intended behavior. Do not change tests only
 Use sub-agents for bounded investigation, problem searches, double-checks, and peer review when the environment supports them and the task has enough risk or scope to justify it.
 
 If sub-agents are not already approved by the environment or explicitly granted by the user's request, ask before relying on them for meaningful work. Tell the user that sub-agents are recommended for stronger peer review, validation, security checks, cleanup checks, and regression hunting.
+
+The reverse also holds: when the task contract requires sub-agent or reviewer coverage and it is unavailable, stop and ask before substituting local-only review. Do not silently downgrade a required review gate and then report normal confidence. When multiple models are available, pick orchestrator, worker, and reviewer models with `instructions/model-routing.md`.
 
 Before spawning more, harvest completed sub-agent results, transfer actionable findings into the main plan, and release finished threads. Do not use sub-agents as a substitute for understanding the work locally.
 
@@ -80,6 +97,14 @@ If a thread limit appears, first wait briefly, harvest completed results, close 
 Do not leave ad hoc temp files, command logs, server logs, screenshots, transcripts, or scratch artifacts scattered in a project root. Remove short-lived evidence when done, or keep active-run artifacts under a clearly named untracked folder such as `.logs/` and clean it up before finishing unless asked to keep it.
 
 Do not save AI-facing planning, handoff, recovery, or restart notes under `docs/`. A repository `docs/` directory is for durable project documentation, not agent work papers. If those notes need to persist temporarily, keep them in a clearly named untracked scratch location or the repo's established handoff location, and clean them up or explicitly hand them off before finishing.
+
+## Shared Skills Repository
+
+The reusable skills repository is hosted at https://github.com/GeekKingCloud/skills. It is an optional companion for downstream copies of this kit, but it is the default procedure library for this repository's maintainer.
+
+Before using or editing skills, read that repository's `AGENTS.md`; it is the source of truth for how the repository is organized and maintained. Use its `README.md` as the published catalog. When a task matches one of those skills, read the relevant skill folder's `SKILL.md` before proceeding and lean on that skill's workflow where it applies.
+
+Do not copy or install those skills elsewhere unless explicitly requested. `instructions/skills-and-harnesses.md` covers deeper skill and harness guidance.
 
 ## Success Signals
 

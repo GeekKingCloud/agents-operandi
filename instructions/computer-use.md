@@ -29,3 +29,4 @@ Use this file when working with browsers, GUIs, filesystems, terminals, media to
 - Keep raw transcripts, renders, and downloads temporary unless requested.
 - Verify generated media exists and is viewable/playable before claiming delivery.
 - Avoid low-quality scripted fallbacks when the user asked for real image or media generation.
+- For renders and long media jobs, apply the stall rule in `instructions/ops-and-automation.md`: no new evidence past the expected window means stop, inspect, and report partial-artifact state rather than waiting silently.

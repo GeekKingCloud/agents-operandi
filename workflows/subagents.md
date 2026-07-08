@@ -2,6 +2,10 @@
 
 Use sub-agents for parallel search, independent review, security passes, cleanup checks, and alternate design perspectives when the environment supports them.
 
+## Required review gates
+
+When the task contract, skill, or user request requires sub-agent or reviewer coverage, treat that as a hard gate. If sub-agents become unavailable, stop and ask whether to wait, abort, or continue in an explicitly degraded local-only mode. Do not silently substitute local-only review and report normal confidence; a downgraded gate must be named in the final report.
+
 ## When to use
 
 Good uses:
@@ -19,6 +23,10 @@ Poor uses:
 - tasks where the sub-agent lacks required secrets or context
 - conflicting edits to the same files
 - replacing the main agent's understanding or final judgment
+
+## Model selection
+
+When the environment offers multiple models, match them to roles with `instructions/model-routing.md`: strongest tier for orchestration and final judgment, task-matched tiers for workers, and reviewers from a different model family than the author when available.
 
 ## Dispatch pattern
 

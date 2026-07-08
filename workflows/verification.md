@@ -26,6 +26,18 @@ Broaden only when the changed surface is shared, risky, or likely to affect unre
 - If a check is skipped, state why and what would be needed to run it.
 - Do not claim success from stale output or the wrong branch.
 
+## Proof states and provenance
+
+For substantial work, label final claims instead of reporting one blended outcome. Separate:
+
+- **Verified:** a current-run check directly proved it.
+- **Inferred:** it follows from evidence but was not directly checked.
+- **Not checked:** no evidence either way.
+- **Blocked:** a check was attempted but access, permissions, or the environment prevented it.
+- **Next proof needed:** the narrowest check that would settle an open claim.
+
+When freshness matters — reruns, releases, generated artifacts, or anything previously verified — also label evidence provenance: fresh, reused, summary-derived, local-only, reviewer-backed, or user-accepted. An exit code, a local pass, or a reviewer's agreement is not delivery proof; name what proves the actual goal and what only proved an intermediate step.
+
 ## Docs-only work
 
 Docs-only changes still need verification:

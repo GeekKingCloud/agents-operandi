@@ -19,6 +19,7 @@ Use this workflow when adding or reorganizing agent-facing repository guidance.
 - Do not expose private memory or host-local configuration in public repo guidance.
 - Prefer short files with clear ownership over one giant instruction dump.
 - Link supporting files from the root entry point so agents know when to load them.
+- Every durable map, index, catalog, or defaults file must carry a rebuild command or a last-verified date plus its source roots. If it cannot be refreshed cheaply, agents should inspect the raw sources directly instead of trusting it.
 
 ## Verification
 
