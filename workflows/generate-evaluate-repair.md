@@ -7,7 +7,7 @@ Use this workflow for non-trivial coding, setup, automation, research synthesis,
 1. **Define Done.** Write or infer observable acceptance criteria before calling work complete.
 2. **Generate.** Create the smallest useful artifact: patch, draft, plan, script, fixture, eval, or summary.
 3. **Evaluate.** Run the narrowest meaningful check: test, lint, typecheck, build, dry-run, health check, diff review, source-backed rubric, or manual inspection.
-4. **Repair.** Fix observed failures or gaps. Do not change the check merely to pass unless the check is wrong and the reason is documented. After a repeated or expensive failure, find the root cause and propose the durable prevention — a skill rule, `AGENTS.md` line, template change, or checkpoint — instead of retrying blind.
+4. **Repair.** Fix observed failures or gaps. Do not change the check merely to pass unless the check is wrong and the reason is documented. After a repeated or expensive failure, find the root cause and propose the durable prevention (a skill rule, `AGENTS.md` line, template change, or checkpoint) instead of retrying blind.
 5. **Repeat.** Continue while each pass reduces risk or uncertainty.
 6. **Stop.** Finish when the artifact is verified, or when the remaining blocker needs owner input, credentials, permissions, destructive action, unusual cost, or a product decision.
 

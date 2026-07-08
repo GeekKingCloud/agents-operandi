@@ -36,7 +36,7 @@ For substantial work, label final claims instead of reporting one blended outcom
 - **Blocked:** a check was attempted but access, permissions, or the environment prevented it.
 - **Next proof needed:** the narrowest check that would settle an open claim.
 
-When freshness matters — reruns, releases, generated artifacts, or anything previously verified — also label evidence provenance: fresh, reused, summary-derived, local-only, reviewer-backed, or user-accepted. An exit code, a local pass, or a reviewer's agreement is not delivery proof; name what proves the actual goal and what only proved an intermediate step.
+When freshness matters, such as reruns, releases, generated artifacts, or anything previously verified, also label evidence provenance: fresh, reused, summary-derived, local-only, reviewer-backed, or user-accepted. An exit code, a local pass, or a reviewer's agreement is not delivery proof; name what proves the actual goal and what only proved an intermediate step.
 
 ## Docs-only work
 

@@ -79,6 +79,8 @@ EXPECTED_REFERENCES = {
         "templates/CONTEXT.md",
         "templates/STYLE.md",
         "templates/MODEL-DEFAULTS.md",
+        "templates/TASK-BRIEF.md",
+        "instructions/model-routing.md",
     ],
     "examples/assistant-ops-repo/AGENTS.md": [
         "../../instructions/personal-assistant.md",
@@ -97,8 +99,29 @@ FORBIDDEN_PATTERNS = {
     ),
     "private unix home path": re.compile(r"/home/[a-z][a-z0-9_-]{0,31}/"),
     "private macos home path": re.compile(r"/Users/[A-Za-z][A-Za-z0-9_-]{0,31}/"),
-    "private windows home path": re.compile(r"(?i)[A-Za-z]:[\\/]Users[\\/][A-Za-z][A-Za-z0-9._-]{0,31}[\\/]"),
+    "private windows home path": re.compile(
+        r"(?i)[A-Za-z]:[\\/]+Users[\\/]+(?!Public\b|Default\b)[A-Za-z][A-Za-z0-9 ._-]{0,63}"
+    ),
 }
+
+# Personal-name checks are intentionally absent: private names must not appear in
+# this public repository even in obfuscated pattern form. Keep any such guards in
+# untracked local tooling.
+
+# Fixture strings are concatenated so the scanner does not match its own test data.
+# Each entry: (pattern name, should_match, sample text).
+PATTERN_SELF_TESTS = [
+    ("private key header", True, "-----BEGIN RSA PRIVATE" + " KEY-----"),
+    ("github token", True, "ghp" + "_" + "a" * 24),
+    ("slack token", True, "xoxb" + "-" + "0" * 24),
+    ("generic api key assignment", True, "api_key" + " = \"" + "A" * 30 + "\""),
+    ("private unix home path", True, "/home/" + "alice/project"),
+    ("private macos home path", True, "/Users/" + "alice/project"),
+    ("private windows home path", True, "C:" + "\\Users\\" + "alice"),
+    ("private windows home path", True, "C:" + "\\\\Users\\\\" + "alice\\\\file"),
+    ("private windows home path", False, "C:" + "\\Users\\" + "<username>\\project"),
+    ("private windows home path", False, "C:" + "\\Users\\" + "Public\\shared"),
+]
 
 TEXT_SUFFIXES = {
     ".md",
@@ -139,6 +162,12 @@ def read_text(path: Path, failures: list[str]) -> str:
 
 def main() -> int:
     failures: list[str] = []
+
+    for name, should_match, sample in PATTERN_SELF_TESTS:
+        matched = bool(FORBIDDEN_PATTERNS[name].search(sample))
+        if matched != should_match:
+            kind = "missed a fixture it must catch" if should_match else "false-positived on a safe fixture"
+            fail(f"pattern self-test failed: {name} {kind}", failures)
 
     for item in REQUIRED_FILES:
         if not (ROOT / item).is_file():

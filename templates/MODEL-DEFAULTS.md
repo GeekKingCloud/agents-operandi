@@ -1,8 +1,8 @@
 # Model Defaults
 
-Environment-specific model routing defaults; edit the rows for your environment. Concrete names below are examples only.
+Environment-specific model routing defaults; edit the rows for your environment. The rows below are illustrative examples in the shape of a real lineup; replace all of them with the models actually available where this file lives.
 
-Last verified: <date> — update this date whenever the names are re-checked against provider docs.
+Last verified: 2026-07-08; update this date whenever the names are re-checked against provider docs.
 
 | Role / task class | Default | Fallback | Notes |
 | --- | --- | --- | --- |
@@ -12,8 +12,6 @@ Last verified: <date> — update this date whenever the names are re-checked aga
 | Mechanical edits, search, summarization | Claude Haiku 4.5 | any small fast model | cheap tier; escalate after two failures |
 | Review / roast gate | GPT-5.5 Codex (high) | Claude Opus 4.8 | prefer different family than the author |
 | Security review | Claude Fable 5 | GPT-5.5 Codex (high) | never the cheapest tier |
-
-The example rows reflect the maintainer's July 2026 environment; replace them with the models actually available where this file lives.
 
 ## How to use
 

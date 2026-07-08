@@ -10,7 +10,7 @@ Exact repo, path, file, branch, session, or artifact the work applies to.
 
 ## Source of truth
 
-Exact branch, repo, installed copy, raw source, or ticket that decides correctness; anything else is evidence only.
+Exact branch, repo, raw source, or ticket that decides correctness. Installed copies, scratch dirs, and summaries are evidence only unless explicitly designated here.
 
 ## Boundary
 
@@ -18,11 +18,11 @@ Touch X, ignore Y, ask before Z.
 
 ## Review gate
 
-local-only ok / sub-agents required / roast required / no reviewers.
+local-only (self-review only) / sub-agents required / roast required / no reviewers (skip review entirely and report the work as unreviewed).
 
 ## Success check
 
-Exact command, artifact, proof packet, or state that proves the goal.
+Exact command, artifact, or state that proves the goal.
 
 ## Stop rule
 

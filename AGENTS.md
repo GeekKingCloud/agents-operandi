@@ -34,7 +34,7 @@ Before substantial work, establish the task contract. When the request supplies 
 - **Target:** the exact repo, path, branch, session, or artifact being changed.
 - **Source of truth:** the exact branch, repo, raw source, or ticket. Installed copies, scratch dirs, side worktrees, and summaries are evidence only unless the user says otherwise.
 - **Boundary:** touch X, ignore Y, ask before Z.
-- **Review gate:** local-only, sub-agents required, roast required, or no reviewers.
+- **Review gate:** local-only (self-review only), sub-agents required, roast required, or no reviewers (skip review entirely and report the work as unreviewed).
 - **Success check:** the exact command, artifact, or state that proves the goal.
 - **Stop rule:** stop on ambiguity, failed proof, a long-running stall without new evidence, or an approval need.
 
@@ -104,7 +104,7 @@ The reusable skills repository is hosted at https://github.com/GeekKingCloud/ski
 
 Before using or editing skills, read that repository's `AGENTS.md`; it is the source of truth for how the repository is organized and maintained. Use its `README.md` as the published catalog. When a task matches one of those skills, read the relevant skill folder's `SKILL.md` before proceeding and lean on that skill's workflow where it applies.
 
-Do not copy or install those skills elsewhere unless explicitly requested. `instructions/skills-and-harnesses.md` covers deeper skill and harness guidance.
+Do not copy or install those skills elsewhere unless explicitly requested. This section is this repository's explicit opt-in under `instructions/skills-and-harnesses.md`; downstream copies should remove it or point it at their own library.
 
 ## Success Signals
 
