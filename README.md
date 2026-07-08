@@ -20,7 +20,7 @@ This kit keeps those lessons portable:
 | Path | Purpose |
 | --- | --- |
 | `AGENTS.md` | Universal entry point and routing table. |
-| `instructions/` | Task-type guidance: coding, review, research, assistant behavior, operations, skills/harnesses, computer use, security/privacy. |
+| `instructions/` | Task-type guidance: coding, review, research, assistant behavior, operations, skills/harnesses, computer use, security/privacy, model routing. |
 | `workflows/` | Reusable process loops: generate/evaluate/repair, verification, subagents, handoff/state, repository docs. |
 | `rubrics/` | Review and eval rubrics that can be applied to plans, code, harnesses, and safety-sensitive changes. |
 | `templates/` | Copyable starter files for downstream projects. |
@@ -67,11 +67,15 @@ rubrics/security-safety.md
 
 Add `instructions/personal-assistant.md` and `rubrics/agent-harness-eval.md` when the repo controls prompts, channels, cron jobs, assistants, MCP servers, evals, or other live agent behavior.
 
+### Multi-model orchestration
+
+When an environment routes work across multiple models or sub-agents, add `instructions/model-routing.md` and copy `templates/MODEL-DEFAULTS.md -> MODEL-DEFAULTS.md`, then fill in the environment's actual model names with a last-verified date. `templates/TASK-BRIEF.md` gives orchestrators a copyable task-contract header for dispatching substantial work.
+
 ## Companion resources
 
 This kit is self-contained and does not require any external skill library. Teams that already use reusable procedure libraries can treat them as optional companions; one example is https://github.com/GeekKingCloud/skills.
 
-External skills should never be required for adopting this AGENTS kit. See `instructions/skills-and-harnesses.md` for scoped guidance on using optional companion skills when a project or user explicitly opts in.
+The root `AGENTS.md` of this repository points at that skills library because it is the maintainer's default procedure source. Downstream copies can drop that section or point it at their own library; nothing in the kit depends on it. See `instructions/skills-and-harnesses.md` for scoped guidance on using optional companion skills when a project or user explicitly opts in.
 
 ## Editing this repo
 
