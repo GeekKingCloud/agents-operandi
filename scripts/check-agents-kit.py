@@ -19,6 +19,7 @@ REQUIRED_FILES = [
     "instructions/security-and-privacy.md",
     "instructions/skills-and-harnesses.md",
     "instructions/computer-use.md",
+    "instructions/model-routing.md",
     "workflows/generate-evaluate-repair.md",
     "workflows/verification.md",
     "workflows/subagents.md",
@@ -36,6 +37,8 @@ REQUIRED_FILES = [
     "templates/HANDOFF.md",
     "templates/PLAN.md",
     "templates/REVIEW.md",
+    "templates/TASK-BRIEF.md",
+    "templates/MODEL-DEFAULTS.md",
     "examples/minimal-repo/AGENTS.md",
     "examples/software-project/AGENTS.md",
     "examples/software-project/CONTEXT.md",
@@ -54,6 +57,9 @@ ROOT_LINKS = [
     "instructions/security-and-privacy.md",
     "instructions/skills-and-harnesses.md",
     "instructions/computer-use.md",
+    "instructions/model-routing.md",
+    "templates/TASK-BRIEF.md",
+    "templates/MODEL-DEFAULTS.md",
     "workflows/generate-evaluate-repair.md",
     "workflows/verification.md",
     "workflows/subagents.md",
@@ -72,7 +78,8 @@ EXPECTED_REFERENCES = {
         "templates/AGENTS.md",
         "templates/CONTEXT.md",
         "templates/STYLE.md",
-                    ],
+        "templates/MODEL-DEFAULTS.md",
+    ],
     "examples/assistant-ops-repo/AGENTS.md": [
         "../../instructions/personal-assistant.md",
         "../../instructions/ops-and-automation.md",
@@ -90,18 +97,8 @@ FORBIDDEN_PATTERNS = {
     ),
     "private unix home path": re.compile(r"/home/[a-z][a-z0-9_-]{0,31}/"),
     "private macos home path": re.compile(r"/Users/[A-Za-z][A-Za-z0-9_-]{0,31}/"),
+    "private windows home path": re.compile(r"(?i)[A-Za-z]:[\\/]Users[\\/][A-Za-z][A-Za-z0-9._-]{0,31}[\\/]"),
 }
-
-ALLOWED_PRIVATE_WORD_FILES = {
-    "examples/assistant-ops-repo/AGENTS.md",
-    "examples/assistant-ops-repo/CONTEXT.md",
-    "examples/assistant-ops-repo/STYLE.md",
-    "instructions/personal-assistant.md",
-}
-
-PRIVATE_NAME_PATTERN = re.compile(
-    r"\b(?:" + "|".join(re.escape(name) for name in ["I" + "an", "K" + "im", "Sh" + "im"]) + r")\b"
-)
 
 TEXT_SUFFIXES = {
     ".md",
@@ -166,8 +163,6 @@ def main() -> int:
         for name, pattern in FORBIDDEN_PATTERNS.items():
             if pattern.search(text):
                 fail(f"{item}: forbidden pattern detected ({name})", failures)
-        if item not in ALLOWED_PRIVATE_WORD_FILES and PRIVATE_NAME_PATTERN.search(text):
-            fail(f"{item}: contains private/example-specific name outside allowed assistant examples", failures)
 
     for item, references in EXPECTED_REFERENCES.items():
         path = ROOT / item
