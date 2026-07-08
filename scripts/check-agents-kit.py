@@ -99,8 +99,10 @@ FORBIDDEN_PATTERNS = {
     "generic api key assignment": re.compile(
         r"(?i)(api[_-]?key|token|secret|password)\s*[:=]\s*['\"]?[A-Za-z0-9_./+-]{24,}"
     ),
-    "private unix home path": re.compile(r"/home/[a-z][a-z0-9_-]{0,31}/"),
-    "private macos home path": re.compile(r"/Users/[A-Za-z][A-Za-z0-9_-]{0,31}/"),
+    "private unix home path": re.compile(r"/home/[a-z][a-z0-9_-]{0,31}(?![A-Za-z0-9_-])"),
+    "private macos home path": re.compile(
+        r"/Users/(?!Shared\b|Guest\b)[A-Za-z][A-Za-z0-9_-]{0,31}(?![A-Za-z0-9_-])"
+    ),
     "private windows home path": re.compile(
         r"(?i)[A-Za-z]:[\\/]+Users[\\/]+(?!Public\b|Default\b)[A-Za-z][A-Za-z0-9 ._-]{0,63}"
     ),
@@ -121,7 +123,12 @@ PATTERN_SELF_TESTS = [
     ("generic api key assignment", True, "api_key" + " = \"" + "A" * 30 + "\""),
     ("generic api key assignment", True, "token" + ": " + "b" * 30),
     ("private unix home path", True, "/home/" + "alice/project"),
+    ("private unix home path", True, "/home/" + "alice"),
+    ("private unix home path", False, "/home/" + "<username>/project"),
     ("private macos home path", True, "/Users/" + "alice/project"),
+    ("private macos home path", True, "/Users/" + "alice"),
+    ("private macos home path", False, "/Users/" + "Shared/media"),
+    ("private macos home path", False, "/Users/" + "<username>/Library"),
     ("private windows home path", True, "C:" + "\\Users\\" + "alice"),
     ("private windows home path", True, "C:" + "\\\\Users\\\\" + "alice\\\\file"),
     ("private windows home path", False, "C:" + "\\Users\\" + "<username>\\project"),
