@@ -19,6 +19,8 @@ Route by task class, not by model name:
 - Review and roast gates go to a strong tier; prefer a different model family than the author of the change for independent perspective when available.
 - Security review goes to a strong tier, never the cheapest.
 
+Routing context to a different provider or model family is a data-sharing decision, not just a quality choice: check the environment's data-handling policy and `instructions/security-and-privacy.md` before sending private content cross-vendor.
+
 When a task mixes classes, route by the riskiest part: a mostly mechanical change with one behavior-owning edit is a behavior change.
 
 Escalation rule: if a cheaper worker fails twice or returns low-confidence output, escalate the model tier instead of retrying the same tier. Repeating the same tier on the same failure burns budget without new evidence.

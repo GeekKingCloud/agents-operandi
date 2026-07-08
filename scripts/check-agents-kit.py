@@ -93,9 +93,11 @@ EXPECTED_REFERENCES = {
 FORBIDDEN_PATTERNS = {
     "private key header": re.compile(r"-----BEGIN (?:RSA |OPENSSH |EC |DSA )?PRIVATE KEY-----"),
     "github token": re.compile(r"gh[pousr]_[A-Za-z0-9_]{20,}"),
+    "github fine-grained pat": re.compile(r"github_pat_[A-Za-z0-9_]{30,}"),
+    "aws access key id": re.compile(r"AKIA[0-9A-Z]{16}"),
     "slack token": re.compile(r"xox[baprs]-[A-Za-z0-9-]{20,}"),
     "generic api key assignment": re.compile(
-        r"(?i)(api[_-]?key|token|secret|password)\s*=\s*['\"]?[A-Za-z0-9_./+-]{24,}"
+        r"(?i)(api[_-]?key|token|secret|password)\s*[:=]\s*['\"]?[A-Za-z0-9_./+-]{24,}"
     ),
     "private unix home path": re.compile(r"/home/[a-z][a-z0-9_-]{0,31}/"),
     "private macos home path": re.compile(r"/Users/[A-Za-z][A-Za-z0-9_-]{0,31}/"),
@@ -113,14 +115,18 @@ FORBIDDEN_PATTERNS = {
 PATTERN_SELF_TESTS = [
     ("private key header", True, "-----BEGIN RSA PRIVATE" + " KEY-----"),
     ("github token", True, "ghp" + "_" + "a" * 24),
+    ("github fine-grained pat", True, "github_pat" + "_" + "a" * 30),
+    ("aws access key id", True, "AKIA" + "0" * 16),
     ("slack token", True, "xoxb" + "-" + "0" * 24),
     ("generic api key assignment", True, "api_key" + " = \"" + "A" * 30 + "\""),
+    ("generic api key assignment", True, "token" + ": " + "b" * 30),
     ("private unix home path", True, "/home/" + "alice/project"),
     ("private macos home path", True, "/Users/" + "alice/project"),
     ("private windows home path", True, "C:" + "\\Users\\" + "alice"),
     ("private windows home path", True, "C:" + "\\\\Users\\\\" + "alice\\\\file"),
     ("private windows home path", False, "C:" + "\\Users\\" + "<username>\\project"),
     ("private windows home path", False, "C:" + "\\Users\\" + "Public\\shared"),
+    ("private windows home path", False, "C:" + "\\Users\\" + "Default\\profile"),
 ]
 
 TEXT_SUFFIXES = {
