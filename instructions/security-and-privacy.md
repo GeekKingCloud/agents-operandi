@@ -1,4 +1,4 @@
-# Security and Privacy Instructions
+# Security and Privacy Preferences
 
 Use this file whenever work touches secrets, accounts, permissions, channels, public repos, logs, user data, or external services.
 
@@ -8,7 +8,7 @@ Use this file whenever work touches secrets, accounts, permissions, channels, pu
 - production `.env` files or live config with secrets
 - user/channel IDs, allowlists, route IDs, or private contact lists unless explicitly intended and safe
 - session logs, chat transcripts, local databases, memory stores, or tool traces
-- private personal facts in generic examples or public docs
+- private personal facts in public working documents or test fixtures
 
 ## Redaction and reporting
 
@@ -18,15 +18,16 @@ Owner-facing or public reports should summarize the issue without dumping raw se
 
 Ask before:
 
+- pushing commits, opening or updating pull requests, publishing releases, deploying, or otherwise changing remote/public state unless the current request explicitly authorizes that exact action
 - rotating credentials or changing account security
 - posting publicly or sending messages/emails to real people
 - purchasing services or incurring unusual cost
 - deleting data or running destructive commands
 - changing production permissions, firewall rules, OAuth scopes, or deploy keys
 
-## Fixtures and examples
+## Public Artifacts and Fixtures
 
-Use synthetic data. Example domains, fake IDs, and placeholders should be obviously fake.
+Use synthetic data for fixtures and demonstrations. Example domains, fake IDs, and placeholders should be obviously fake. Public working-preference repositories may describe personal taste, but must not contain private memory, host-specific secrets, session histories, or identifying operational data.
 
 Bad:
 

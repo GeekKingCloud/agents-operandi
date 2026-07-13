@@ -1,4 +1,4 @@
-# Research Instructions
+# Research Preferences
 
 Use this file for web research, source triage, trend analysis, claim checking, and signal-vs-noise summaries.
 

@@ -1,56 +1,59 @@
-# Sub-Agent Workflow
+# Purposeful Sub-Agent Workflow
 
-Use sub-agents for parallel search, independent review, security passes, cleanup checks, and alternate design perspectives when the environment supports them.
+Use sub-agents liberally on substantial work when parallel investigation, independent judgment, or focused expertise can improve the result. Do not spawn them merely to create activity: every sub-agent needs a role in the reasoning system.
 
-## Required review gates
+## Useful Roles
 
-When the task contract, skill, or user request requires sub-agent or reviewer coverage, treat that as a hard gate. If sub-agents become unavailable, stop and ask whether to wait, abort, or continue in an explicitly degraded local-only mode. Do not silently substitute local-only review and report normal confidence; a downgraded gate must be named in the final report.
+| Role | Contribution | Typical question |
+| --- | --- | --- |
+| **Proposer** | Develops a concrete approach or implementation slice. | What is the strongest practical solution? |
+| **Skeptic** | Challenges assumptions, complexity, and hidden failure modes. | Why might this be wrong or needlessly elaborate? |
+| **Goal steward** | Guards the user's intent, boundaries, and acceptance criteria. | Does this still solve the requested problem? |
+| **Verifier** | Checks claims against source, behavior, commands, or artifacts. | What is actually proved, and what remains inferred? |
+| **Specialist** | Applies relevant domain knowledge to a bounded surface. | What would an expert in this risk area catch? |
 
-## When to use
+Roles are lenses and authority boundaries, not decorative personas. One agent may own a bounded implementation slice; another may be read-only. For difficult decisions, a proposer and skeptic can form a useful debate while the goal steward prevents the argument from drifting away from the user's outcome.
 
-Good uses:
+## Dispatch Contract
 
-- search a large repo for related patterns
-- review a plan or diff from a fresh context
-- run a security/privacy lens
-- compare implementation options
-- inspect docs for consistency
-- validate an eval or harness design
+Give every sub-agent:
 
-Poor uses:
+- its role and the concrete question it must answer
+- exact repository, worktree, paths, revision, or artifact
+- relevant source context and assumptions to verify
+- scope, ownership, files it may edit, and actions it must not take
+- evidence expectations and checks it should run
+- required output shape and completion condition
 
-- work needing user interaction
-- tasks where the sub-agent lacks required secrets or context
-- conflicting edits to the same files
-- replacing the main agent's understanding or final judgment
+Do not dispatch vague requests such as “review this” or “help with the repo.” Independence comes from a clear lens and fresh judgment, not missing context.
 
-## Model selection
+Avoid concurrent edits to the same files unless the workflow explicitly supports reconciliation. Prefer read-only parallel review while one owner integrates, or give workers disjoint file ownership.
 
-When the environment offers multiple models, match them to roles with `instructions/model-routing.md`: strongest tier for orchestration and final judgment, task-matched tiers for workers, and reviewers from a different model family than the author when available.
+## Approval and Required Gates
 
-## Dispatch pattern
+Follow the active environment and skill policy for sub-agent approval. If approval is required and has not been granted, ask before relying on meaningful delegated work.
 
-Give each sub-agent:
+When the user, task contract, or selected skill requires reviewer or sub-agent coverage, treat it as a hard gate. If that coverage becomes unavailable, stop and ask whether to wait, abort, or continue in an explicitly degraded local-only mode. Never silently substitute self-review and report normal confidence.
 
-- target repo/path
-- exact task goal
-- relevant files or context snippets
-- what not to edit, if read-only
-- output format and acceptance criteria
+## Model and Provider Routing
 
-Harvest results before spawning more. Transfer actionable findings into the main plan, verify them against source, and discard unsupported claims.
+Route by responsibility and risk, not a fashionable model name:
 
-## Review lenses
+- strongest available reasoning/agentic tier for orchestration, architecture, difficult debugging, and final judgment
+- domain-matched worker for a bounded specialist task
+- faster/cheaper worker for mechanical search or transformation when errors are easy to detect
+- strong, preferably independent reviewer for Roast, security, and release gates
 
-For substantial changes, use multiple lenses when useful:
+Cross-provider routing is also a data-sharing decision. Check privacy and environment policy before sending private code or context to a different provider. If model availability or reviewer independence materially weakens a required gate, report it.
 
-- implementer/maintainer
-- release-risk/roast reviewer
-- security/privacy reviewer
-- docs/readability reviewer
-- operator/user-experience reviewer
-- test/eval reviewer
+If a lower-cost worker fails twice without producing new evidence, change the model tier, role, brief, or approach instead of repeating the same dispatch.
 
-## Final responsibility
+## Integration
 
-Sub-agent summaries are evidence, not truth. The main agent must integrate, verify, and own the final decision.
+Harvest completed results before spawning replacements. Verify findings against the real source, transfer actionable items into the main plan, and release finished threads.
+
+If a thread limit appears, wait briefly, harvest and close completed threads, then retry once before treating capacity as a blocker.
+
+The orchestrator owns the final decision. Resolve disagreement against the user's goal, source of truth, observed evidence, risk, and simplicity. Do not vote, average opinions, or accept a confident sub-agent summary without checking it.
+
+Final reporting should name the purposeful roles used, what they examined, which findings changed the work, and any required lens that was unavailable.

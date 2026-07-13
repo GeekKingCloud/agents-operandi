@@ -1,4 +1,4 @@
-# Computer-Use Instructions
+# Computer-Use Preferences
 
 Use this file when working with browsers, GUIs, filesystems, terminals, media tools, or local apps.
 
@@ -19,6 +19,7 @@ Use this file when working with browsers, GUIs, filesystems, terminals, media to
 
 ## Terminal and files
 
+- Stay in the host's native shell and filesystem unless the user asks for a different environment. On Windows, prefer PowerShell and explicit Git Bash when Bash is required; do not drift into WSL for repository work.
 - Use project-native commands and package managers.
 - Avoid shell one-liners for edits when safer file-edit tools are available.
 - Use temp dirs for probes and clean them up.
@@ -29,4 +30,4 @@ Use this file when working with browsers, GUIs, filesystems, terminals, media to
 - Keep raw transcripts, renders, and downloads temporary unless requested.
 - Verify generated media exists and is viewable/playable before claiming delivery.
 - Avoid low-quality scripted fallbacks when the user asked for real image or media generation.
-- For renders and long media jobs, apply the stall rule in `instructions/ops-and-automation.md`: no new evidence past the expected window means stop, inspect, and report partial-artifact state rather than waiting silently.
+- For renders and long media jobs, apply the stall rule in `instructions/operations.md`: no new evidence past the expected window means stop, inspect, and report partial-artifact state rather than waiting silently.
