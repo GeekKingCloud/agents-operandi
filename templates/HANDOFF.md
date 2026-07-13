@@ -4,9 +4,14 @@
 
 Current objective.
 
-## Branch/path
+## Repository / worktree / branch
 
-Current branch, repo path, or workspace.
+Exact source repository, worktree path, and branch.
+
+## Commits and publication
+
+- Local commits: `<hash> <subject>`
+- Publication: local-only / pushed branch / PR URL / release
 
 ## Changed files
 
@@ -14,7 +19,7 @@ Current branch, repo path, or workspace.
 
 ## Checks run
 
-- `<command>`: result
+- `<command>`: result; fresh/reused; local-only/reviewer-backed
 
 ## Decisions
 
@@ -22,7 +27,7 @@ Current branch, repo path, or workspace.
 
 ## Blockers / next action
 
-Exact next step or owner decision needed.
+Exact next command, file, approval, or owner decision needed to resume.
 
 ## Risks
 

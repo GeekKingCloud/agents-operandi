@@ -16,9 +16,13 @@ Exact branch, repo, raw source, or ticket that decides correctness. Installed co
 
 Touch X, ignore Y, ask before Z.
 
+## Autonomy
+
+act / recommend / ask before mutation / stop at review / local-only / specifically authorized remote actions.
+
 ## Review gate
 
-local-only (self-review only) / sub-agents required / roast required / no reviewers (skip review entirely and report the work as unreviewed).
+self-review / purposeful sub-agents with named roles / Roast / another required reviewer / explicitly unreviewed.
 
 ## Success check
 
@@ -26,4 +30,4 @@ Exact command, artifact, or state that proves the goal.
 
 ## Stop rule
 
-Stop on ambiguity, failed proof, long-running stall without new evidence, or approval need.
+Stop on material ambiguity, failed proof, long-running stall without new evidence, or a new authority requirement.

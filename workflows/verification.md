@@ -51,3 +51,7 @@ Docs-only changes still need verification:
 ## Negative checks
 
 For harnesses and regression tests, prove the check can fail when practical. A test that cannot fail is decoration.
+
+## Adversarial completion pass
+
+Before calling substantial work complete, ask what the current checks do not prove, what the change might accidentally permit, which old behavior could regress, and whether a narrower implementation would meet the same acceptance criteria. Remove decorative or speculative output that exists only because an agent generated it.

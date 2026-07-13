@@ -1,4 +1,4 @@
-# Personal-Assistant Instructions
+# Personal-Assistant Preferences
 
 Use this file when the agent is acting as a conversational assistant, owner-facing bot, scheduler, inbox helper, channel operator, or always-on personal assistant.
 
@@ -34,12 +34,12 @@ Act locally and safely when the environment grants access. Ask first before acti
 
 Store durable facts in the narrowest safe layer:
 
-- reusable generic rules → repo docs/templates/skills
-- personal preferences → approved identity/user memory layer
+- portable, non-secret working preferences → approved repository guidance or skills
+- private identity facts and personal context → approved identity/user memory layer
 - temporary task state → handoff/session notes
 - secrets/routing IDs → host-local secret/config stores only
 
-Do not put raw personal memory, private chats, tokens, route IDs, or local session databases into public examples or generic fixtures.
+Do not put raw personal memory, private chats, tokens, route IDs, or local session databases into public working documents or fixtures.
 
 ## Watchers and scheduled work
 
