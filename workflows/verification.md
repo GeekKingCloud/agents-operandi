@@ -18,6 +18,16 @@ Start with the check closest to the changed behavior:
 
 Broaden only when the changed surface is shared, risky, or likely to affect unrelated areas.
 
+## Verification cadence
+
+Verification has a cost, so match its cadence to the evidence needed. During a coherent implementation batch, prefer the smallest reliable test case, filter, reproduction, or focused check that can falsify the changed behavior. Do not default to an entire test file or suite after every small fix when a narrower check proves the same claim. Use the smallest affected file or group when tighter isolation is unavailable or would be misleading.
+
+Keep logical commit boundaries separate from broad-suite cadence. Accumulate related fixes and run broader intersecting checks once the batch is stable, at a meaningful integration, handoff, review, delivery, or risk checkpoint. When a broad run fails, iterate on the failing subset and rerun the broader check once the affected batch is stable instead of repeating it after every repair.
+
+When an interruption is imminent, make an already-authorized safety-checkpoint push first and record pending proof rather than risking the accumulated commits while a broad gate runs. Complete the broader gates on resume before claiming readiness or delivery.
+
+Cost never overrides proof. Shared fixtures, cross-cutting behavior, security-sensitive changes, or repository-required final gates may justify earlier or repeated broad verification. Rerun a check whenever later work intersects the behavior or evidence it established.
+
 ## Evidence rules
 
 - Run checks from the correct repository/root/environment.
