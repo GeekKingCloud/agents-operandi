@@ -42,6 +42,14 @@ Use `workflows/verification.md` for proof states, provenance, and final claims.
 - Never push, create or update a pull request, merge, tag, release, or deploy without specific user authorization for that remote action. Ask when publication would be the useful next step.
 - Before any authorized publication, inspect the diff and status, run the relevant checks, and report skipped proof or residual risk honestly.
 
+### Commit and push cadence
+
+Keep logical commits reviewable without treating every commit as a reason to push. Once the current task explicitly authorizes remote work on the branch, prefer to accumulate related local commits and push them together at a meaningful integration, review, or delivery checkpoint. This avoids repeatedly spending CI or hosted-runner time on intermediate states.
+
+Push the accumulated commits sooner when remote continuity matters: before a foreseeable interruption or handoff, a user-requested stop or task switch, a blocking state, approaching session, context, or usage limits, or another credible risk that the local checkout will become unavailable. Report the exact pushed state and any checks still pending; a safety checkpoint is not a readiness claim. A concrete current collaboration, review, dependency, or backup need may also justify an immediate push. Treat batching as a cost-aware preference, not a prohibition against useful pushes.
+
+Without current remote authorization, commit locally and hand off the exact path, branch, and hashes instead. This cadence never creates publication permission by itself.
+
 ## Default Development Loop
 
 A capable coding agent working directly in its native harness is the default. It can inspect, plan, implement, verify, review, and iterate without adding orchestration machinery simply because that machinery exists.

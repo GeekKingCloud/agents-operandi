@@ -20,6 +20,7 @@ Do not put transient agent work papers under durable `docs/`, and do not include
 ## Before Pausing or Finishing
 
 - confirm the reported path, branch, commits, and status are current
+- when the current task authorizes pushing the working branch, push accumulated commits before a foreseeable interruption or handoff when remote continuity is safer; otherwise preserve them locally and report the exact hashes
 - update or remove stale temporary handoff notes
 - clean scratch artifacts and temporary processes
 - distinguish completed work from next work
