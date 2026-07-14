@@ -19,6 +19,10 @@ Use this file for implementation, debugging, refactoring, tests, repository main
 - Comment tricky invariants, surprising edge cases, and external constraints. Do not narrate obvious code or preserve stale reasoning.
 - Clean up files, branches, scaffolding, flags, and documentation made obsolete by the change; mention unrelated drift instead of silently expanding scope.
 
+## Finish the Implementation
+
+After the requested behavior works and before final verification or commit, use the [implementation finish workflow](../workflows/implementation-finish.md). Review the task diff and directly affected flow for unnecessary scaffolding, speculative flexibility, brittle tests, narration, and residue. Preserve behavior, trust boundaries, durable coverage, and supported compatibility; this is a proportional finish pass, not permission for a broad refactor.
+
 ## Tests and Verification
 
 When expected behavior is clear, prefer a concrete failing test or reproduction before the fix. Confirm that it fails for the right reason, implement the minimal correction, rerun the focused check, then broaden only when the changed surface warrants it.

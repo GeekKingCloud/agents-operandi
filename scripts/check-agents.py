@@ -19,6 +19,7 @@ REQUIRED_FILES = {
     "instructions/security-and-privacy.md",
     "instructions/skills.md",
     "workflows/handoff.md",
+    "workflows/implementation-finish.md",
     "workflows/repository-guidance.md",
     "workflows/subagents.md",
     "workflows/verification.md",
@@ -58,7 +59,14 @@ POLICY_SMOKE_MARKERS = {
         "lumber-hack",
         "atoshell",
         "g8ldfish",
+        "implementation finish workflow",
         "Never push, create or update a pull request",
+    ],
+    "workflows/implementation-finish.md": [
+        "Remove Unjustified Machinery",
+        "Keep Tests and Explanations Durable",
+        "Never remove authentication",
+        "rerun every affected check",
     ],
     "instructions/skills.md": [
         "default procedure layer",

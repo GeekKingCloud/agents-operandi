@@ -2,7 +2,7 @@
 
 This repository is the public backup of my working preferences for coding agents and adjacent assistants. It is built for how I work. It is not a generic starter kit, a copy-this-repo onboarding system, or an attempt to make one configuration suit everyone.
 
-The root `AGENTS.md` is the small, predictable entry point. It contains the durable rules that should be visible every time and routes task-specific work to focused files that agents load only when relevant. Reusable procedures live in [GeekKingCloud/skills](https://github.com/GeekKingCloud/skills) instead of being copied here as competing rubrics.
+The root `AGENTS.md` is the small, predictable entry point. It contains the durable rules that should be visible every time and routes task-specific work to focused files that agents load only when relevant. Specialized reusable procedures and review machinery live in [GeekKingCloud/skills](https://github.com/GeekKingCloud/skills) instead of being copied here as competing rubrics. Small local workflows may own durable personal policies that this baseline itself needs to route.
 
 ## Structure
 
@@ -17,6 +17,7 @@ The root `AGENTS.md` is the small, predictable entry point. It contains the dura
 | `instructions/personal-assistant.md` | Owner-facing communication and autonomy boundaries. |
 | `instructions/security-and-privacy.md` | Secrets, permissions, publishing, and private data. |
 | `workflows/subagents.md` | Purposeful roles, debate structure, dispatch, and integration. |
+| `workflows/implementation-finish.md` | Proportional cleanup of AI-heavy scaffolding, brittle tests, narration, and residue after behavior works. |
 | `workflows/verification.md` | Checks, proof states, provenance, and evidence boundaries. |
 | `workflows/handoff.md` | Restart-safe state and exact work-location reporting. |
 | `workflows/repository-guidance.md` | Ownership split for `AGENTS.md`, `CONTEXT.md`, `STYLE.md`, and related files. |
@@ -31,7 +32,7 @@ This shape follows the useful part of the [AGENTS.md convention](https://agents.
 
 - Personal preferences beat broad portability. Public visibility lets others borrow ideas, but does not weaken my defaults.
 - The root remains compact. Detailed software, research, computer-use, operational, and assistant preferences live with their owning task type.
-- Skills own reusable procedures and review machinery. This repository says which procedures I expect agents to use; it does not duplicate them.
+- Skills own specialized reusable procedures and review machinery. Small local workflows own durable personal policies that need more detail than the root should carry; they do not duplicate a skill.
 - Sub-agents need a reason to exist. Roles such as proposer, skeptic, goal steward, verifier, and specialist create useful tension and evidence instead of parallel noise.
 - A capable coding agent working directly in its native harness is the default development loop. `lumber-hack`, `atoshell`, and `g8ldfish` remain useful experiments for durable decomposition, ticket state, and parallel execution when those costs are justified.
 - Local work is easy to authorize and inspect. Remote publication always requires a specific request.
